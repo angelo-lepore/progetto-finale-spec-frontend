@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function AboutPage() {
   return (
     <main>
-      {/* HERO */}
+      {/* Chi Siamo */}
       <section className="bg-light py-5">
         <div className="container text-center py-5">
           <i className="bi bi-info-circle-fill display-3 mb-3 text-warning"></i>
@@ -19,7 +19,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CONTATTI E INFORMAZIONI */}
+      {/* Contatti */}
       <section className="py-5 bg-white">
         <div className="container">
           <div className="row text-center mb-4">
@@ -57,7 +57,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* SOCIAL MEDIA */}
+      {/* Social */}
       <section className="py-5 bg-light text-center">
         <div className="container">
           <h2 className="fw-bold mb-4">Seguici sui social</h2>
@@ -91,7 +91,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ISCRIVITI ALLA NEWSLETTER */}
+      {/* Newsletter */}
       <section className="bg-dark text-light py-5">
         <div className="container text-center">
           <h2 className="fw-bold mb-3">Resta aggiornato!</h2>

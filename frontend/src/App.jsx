@@ -12,6 +12,7 @@ import HomePage from "./pages/HomePage.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
 import SmartphonesPage from "./pages/SmartphonesPage.jsx";
 import ComparePage from "./pages/ComparePage.jsx";
+import SmartphoneDetailPage from "./pages/SmartphoneDetailPage.jsx";
 
 // Componente principale dell'app
 function App() {
@@ -25,6 +26,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/smartphones" element={<SmartphonesPage />} />
+            <Route path="/smartphones/:id" element={<SmartphoneDetailPage />} />
             <Route path="/compare" element={<ComparePage />} />
           </Route>
         </Routes>

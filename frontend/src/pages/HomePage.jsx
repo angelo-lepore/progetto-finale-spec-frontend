@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function HomePage() {
   return (
     <main>
-      {/* HERO */}
+      {/* Sfoglia e confronta smartphone */}
       <section className="bg-dark text-light py-5">
         <div className="container text-center py-5">
           <i className="bi bi-phone-fill display-3 mb-3 text-warning"></i>
@@ -28,7 +28,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* PERCHÉ SCEGLIERCI */}
+      {/* Perché scegliere PhoneCompare? */}
       <section
         className="py-5"
         style={{ backgroundColor: "rgba(248, 249, 250, 0.9)" }}
@@ -77,7 +77,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA FINALE */}
+      {/* Confronta smartphone */}
       <section className="bg-dark text-light py-5">
         <div className="container text-center">
           <h2 className="fw-bold mb-3">
