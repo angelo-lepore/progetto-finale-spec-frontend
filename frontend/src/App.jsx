@@ -11,8 +11,8 @@ import DefaultLayout from "./layout/DefaultLayout.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
 import SmartphonesPage from "./pages/SmartphonesPage.jsx";
-import ComparePage from "./pages/ComparePage.jsx";
 import SmartphoneDetailPage from "./pages/SmartphoneDetailPage.jsx";
+import ComparePage from "./pages/ComparePage.jsx";
 
 // Componente principale dell'app
 function App() {
