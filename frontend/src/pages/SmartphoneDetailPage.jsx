@@ -1,16 +1,24 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { toggleFavorite, isFavorite } from "../utils/favorites";
 
 export default function SmartphoneDetailPage() {
   // Prendiamo l'id dello smartphone dall'URL
   const { id } = useParams();
-
   // Stato per salvare il prodotto selezionato
   const [phone, setPhone] = useState(null);
-
   // Stato per gestire il caricamento e eventuali errori
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  // Stato per gestire se lo smartphone è nei preferiti
+  const [favorite, setFavorite] = useState(false);
+
+  // useEffect per gestire lo stato dei preferiti
+  useEffect(() => {
+    if (phone) {
+      setFavorite(isFavorite(phone.id));
+    }
+  }, [phone]);
 
   // useEffect eseguito al montaggio del componente o quando cambia l'id
   useEffect(() => {
@@ -58,8 +66,21 @@ export default function SmartphoneDetailPage() {
     <main>
       <section className="py-5 bg-light">
         <div className="container text-center">
-          {/* Titolo dello smartphone */}
-          <h1 className="fw-bold mb-3">{phone.title}</h1>
+          <div className="d-flex justify-content-center align-items-center gap-2 mb-3">
+            {/* Titolo dello smartphone */}
+            <h1 className="fw-bold m-0">{phone.title}</h1>
+            {/* Bottone per aggiungere/rimuovere dai preferiti */}
+            <button
+              onClick={() => {
+                toggleFavorite(phone.id);
+                setFavorite(!favorite);
+              }}
+              className="favorite-star small"
+              aria-label="Aggiungi ai preferiti"
+            >
+              {favorite ? "★" : "☆"}
+            </button>
+          </div>
           {/* Immagine */}
           {phone.imageUrl && (
             <img

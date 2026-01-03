@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 export default function ComparePage() {
   // Recupera lo stato passato dalla pagina precedente (dettaglio/lista)
   const location = useLocation();
+  // Stato iniziale dei prodotti da confrontare, se presenti
   const { products: initialProducts } = location.state || {};
-
   // Stato per tutti gli smartphone disponibili
   const [allSmartphones, setAllSmartphones] = useState([]);
   // Stato per il primo smartphone selezionato (pre-selezionato se passato nello state)
@@ -13,11 +13,11 @@ export default function ComparePage() {
   // Stato per il secondo smartphone selezionato
   const [phone2, setPhone2] = useState(null);
 
-  // Carica tutti gli smartphone dal backend una volta all'inizio
+  // useEffect per caricare tutti gli smartphone dal backend una volta all'inizio
   useEffect(() => {
     fetch("http://localhost:3001/products")
       .then((res) => res.json())
-      .then((data) => setAllSmartphones(data)) // salva tutti i prodotti nello stato
+      .then((data) => setAllSmartphones(data))
       .catch((err) => console.error("Errore fetch:", err));
   }, []);
 
@@ -28,7 +28,6 @@ export default function ComparePage() {
       setter(null);
       return;
     }
-
     // Fetch del singolo prodotto dal backend
     fetch(`http://localhost:3001/products/${id}`)
       .then((res) => res.json())
@@ -45,7 +44,6 @@ export default function ComparePage() {
       <section className="py-5 bg-light">
         <div className="container">
           <h1 className="text-center mb-5">Confronto smartphone</h1>
-
           {/* Dropdown per selezionare i due smartphone */}
           <div className="row mb-4">
             {/* Primo smartphone */}
@@ -97,7 +95,6 @@ export default function ComparePage() {
                   <div className="card h-100 shadow-sm p-4 text-center d-flex flex-column">
                     {/* Titolo smartphone */}
                     <h3 className="fw-bold">{phone.title}</h3>
-
                     {/* Immagine smartphone */}
                     {phone.imageUrl && (
                       <img
@@ -107,7 +104,6 @@ export default function ComparePage() {
                         style={{ height: "200px", objectFit: "contain" }}
                       />
                     )}
-
                     {/* Lista delle specifiche */}
                     <ul className="list-group list-group-flush text-start flex-grow-1">
                       <li className="list-group-item d-flex justify-content-between">
@@ -156,7 +152,6 @@ export default function ComparePage() {
               ))}
             </div>
           )}
-
           {/* Pulsante per tornare alla lista */}
           <div className="text-center mt-4">
             <Link to="/smartphones" className="btn btn-dark btn-lg">
