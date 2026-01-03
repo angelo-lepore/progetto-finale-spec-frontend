@@ -59,7 +59,7 @@ export default function Header() {
                   (isActive ? " active fw-bold" : "")
                 }
               >
-                <i className="bi bi-arrow-left-right"></i> Compare
+                <i className="bi bi-arrow-left-right"></i> Confronta
               </NavLink>
             </li>
 
@@ -71,25 +71,22 @@ export default function Header() {
                   (isActive ? " active fw-bold" : "")
                 }
               >
-                <i className="bi bi-info-circle-fill"></i> About
+                <i className="bi bi-info-circle-fill"></i> Chi siamo
               </NavLink>
             </li>
           </ul>
 
-          {/* Barra di ricerca */}
-          <form className="d-flex">
-            <div className="input-group">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Search Smartphone..."
-                aria-label="Search Smartphone"
-              />
-              <button className="btn btn-outline-light" type="button">
-                <i className="bi bi-search"></i>
-              </button>
-            </div>
-          </form>
+          {/* Link ai preferiti */}
+          <div className="d-flex align-items-center ms-3">
+            <Link
+              to="/favorites" // pagina dei preferiti
+              className="text-warning fs-4" // colore giallo ★
+              style={{ textDecoration: "none" }}
+              title="Preferiti"
+            >
+              ★
+            </Link>
+          </div>
         </div>
       </nav>
     </header>

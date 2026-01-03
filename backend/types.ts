@@ -19,5 +19,5 @@ export type Product = {
   os: "iOS" | "Android";    // Sistema operativo
   has5G: boolean;           // Supporto 5G
 
-  imageUrl?: string; // 👈 immagine smartphone
+  imageUrl?: string; // immagine smartphone
 };

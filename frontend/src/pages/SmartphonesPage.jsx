@@ -1,62 +1,78 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function SmartphonesPage() {
-  // Lista di smartphone - per esempio
-  const smartphones = [
-    {
-      id: 1,
-      name: "iPhone 15",
-      brand: "Apple",
-      price: "999€",
-      image: "/images/iphone15.png",
-    },
-    {
-      id: 2,
-      name: "Galaxy S24",
-      brand: "Samsung",
-      price: "899€",
-      image: "/images/galaxys24.jpg",
-    },
-    {
-      id: 3,
-      name: "Pixel 9",
-      brand: "Google",
-      price: "799€",
-      image: "/images/pixel9.jpg",
-    },
-  ];
+  // Stato per salvare la lista completa di smartphone ricevuta dal backend
+  const [smartphones, setSmartphones] = useState([]);
+  // Stato per gestire il caricamento
+  const [loading, setLoading] = useState(true);
+  // Stato per la ricerca
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // Recuperiamo i dati dal backend
+  useEffect(() => {
+    fetch("http://localhost:3001/products")
+      .then((res) => res.json())
+      .then((data) => {
+        setSmartphones(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Errore nel fetch:", error);
+        setLoading(false);
+      });
+  }, []);
+
+  // Mostriamo messaggio di caricamento finché i dati non arrivano
+  if (loading) {
+    return <p className="text-center mt-5">Caricamento...</p>;
+  }
+
+  // Filtriamo gli smartphone in base al termine di ricerca
+  const filteredSmartphones = smartphones.filter((phone) =>
+    phone.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <main>
-      {/* Lista smartphone */}
       <section className="py-5 bg-light">
         <div className="container">
-          <div className="row g-4">
-            {smartphones.map((phone) => (
-              <div key={phone.id} className="col-md-4">
-                <div className="card h-100 shadow-sm text-center p-4 border-0">
-                  {/* Immagine dello smartphone */}
-                  <div className="mb-3" style={{ height: "200px" }}>
-                    <img
-                      src={phone.image}
-                      alt={phone.name}
-                      className="img-fluid h-100"
-                      style={{ objectFit: "contain" }}
-                    />
-                  </div>
+          {/* Barra di ricerca */}
+          <div className="mb-4">
+            <input
+              type="text"
+              className="form-control search-input"
+              placeholder="Cerca smartphone..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
 
-                  <h5 className="fw-bold">{phone.name}</h5>
-                  <p className="text-muted">{phone.brand}</p>
-                  <p className="fw-bold">{phone.price}</p>
-                  <Link
-                    to={`/smartphones/${phone.id}`}
-                    className="btn btn-outline-dark"
-                  >
-                    Dettagli
-                  </Link>
+          <div className="row g-4">
+            {/* Ciclo sugli smartphone filtrati */}
+            {filteredSmartphones.length > 0 ? (
+              filteredSmartphones.map((phone) => (
+                <div key={phone.id} className="col-md-4">
+                  <div className="card h-100 shadow-sm text-center p-4 border-0">
+                    {/* Titolo */}
+                    <h5 className="fw-bold">{phone.title}</h5>
+
+                    {/* Categoria */}
+                    <p className="text-muted">{phone.category}</p>
+
+                    {/* Link alla pagina di dettaglio */}
+                    <Link
+                      to={`/smartphones/${phone.id}`}
+                      className="btn btn-outline-dark mt-3"
+                    >
+                      Dettagli
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <p className="text-center mt-3">Nessuno smartphone trovato</p>
+            )}
           </div>
         </div>
       </section>

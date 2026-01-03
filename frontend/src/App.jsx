@@ -13,6 +13,7 @@ import AboutPage from "./pages/AboutPage.jsx";
 import SmartphonesPage from "./pages/SmartphonesPage.jsx";
 import SmartphoneDetailPage from "./pages/SmartphoneDetailPage.jsx";
 import ComparePage from "./pages/ComparePage.jsx";
+import FavoritesPage from "./pages/favoritesPage.jsx";
 
 // Componente principale dell'app
 function App() {
@@ -28,6 +29,7 @@ function App() {
             <Route path="/smartphones" element={<SmartphonesPage />} />
             <Route path="/smartphones/:id" element={<SmartphoneDetailPage />} />
             <Route path="/compare" element={<ComparePage />} />
+            <Route path="/favorites" element={<FavoritesPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
