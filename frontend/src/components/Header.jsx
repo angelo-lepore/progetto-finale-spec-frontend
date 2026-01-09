@@ -1,11 +1,17 @@
 // Import NavLink e Link
 import { NavLink, Link } from "react-router-dom";
+// Import useContext
+import { useContext } from "react";
+// Import GlobalContext
+import { GlobalContext } from "../contexts/GlobalContext";
 
 export default function Header() {
+  const { favorites } = useContext(GlobalContext);
   return (
     <header>
+      {/* Navbar */}
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
-        {/* Brand */}
+        {/* Logo */}
         <Link className="navbar-brand d-flex align-items-center gap-2" to="/">
           <i className="bi bi-phone-fill fs-4"></i>
           <span className="fw-bold">PhoneCompare</span>
@@ -76,15 +82,15 @@ export default function Header() {
             </li>
           </ul>
 
-          {/* Link ai preferiti */}
+          {/* Icona dei preferiti */}
           <div className="d-flex align-items-center ms-3">
             <Link
-              to="/favorites" // pagina dei preferiti
-              className="text-warning fs-4" // colore giallo ★
+              to="/favorites"
+              className="text-warning fs-4"
               style={{ textDecoration: "none" }}
               title="Preferiti"
             >
-              ★
+              ★ {favorites.length > 0 && <span>({favorites.length})</span>}
             </Link>
           </div>
         </div>

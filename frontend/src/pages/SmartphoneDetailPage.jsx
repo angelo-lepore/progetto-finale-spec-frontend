@@ -1,24 +1,20 @@
+// Import Link e useParams
 import { useParams, Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { toggleFavorite, isFavorite } from "../utils/favorites";
+// Import useContext, useEffect e useState
+import { useContext, useEffect, useState } from "react";
+// Import GlobalContext
+import { GlobalContext } from "../contexts/GlobalContext";
 
 export default function SmartphoneDetailPage() {
   // Prendiamo l'id dello smartphone dall'URL
   const { id } = useParams();
+  // Prendiamo le funzioni e lo stato dal contesto globale
+  const { toggleFavorite, isFavorite } = useContext(GlobalContext);
   // Stato per salvare il prodotto selezionato
   const [phone, setPhone] = useState(null);
   // Stato per gestire il caricamento e eventuali errori
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  // Stato per gestire se lo smartphone è nei preferiti
-  const [favorite, setFavorite] = useState(false);
-
-  // useEffect per gestire lo stato dei preferiti
-  useEffect(() => {
-    if (phone) {
-      setFavorite(isFavorite(phone.id));
-    }
-  }, [phone]);
 
   // useEffect eseguito al montaggio del componente o quando cambia l'id
   useEffect(() => {
@@ -27,14 +23,12 @@ export default function SmartphoneDetailPage() {
       .then((res) => res.json()) // Convertiamo la risposta in JSON
       .then((data) => {
         console.log("Dati ricevuti:", data);
-
         // Controlliamo se la risposta è valida e contiene il prodotto
         if (!data.success || !data.product) {
           setError(true); // Se non ci sono dati, impostiamo l'errore
         } else {
           setPhone(data.product); // Salviamo il prodotto nello stato
         }
-
         setLoading(false); // Caricamento completato
       })
       .catch((err) => {
@@ -66,19 +60,15 @@ export default function SmartphoneDetailPage() {
     <main>
       <section className="py-5 bg-light">
         <div className="container text-center">
+          {/* Titolo + bottone preferiti */}
           <div className="d-flex justify-content-center align-items-center gap-2 mb-3">
-            {/* Titolo dello smartphone */}
             <h1 className="fw-bold m-0">{phone.title}</h1>
-            {/* Bottone per aggiungere/rimuovere dai preferiti */}
             <button
-              onClick={() => {
-                toggleFavorite(phone.id);
-                setFavorite(!favorite);
-              }}
+              onClick={() => toggleFavorite(phone)}
               className="favorite-star small"
               aria-label="Aggiungi ai preferiti"
             >
-              {favorite ? "★" : "☆"}
+              {isFavorite(phone.id) ? "★" : "☆"}
             </button>
           </div>
           {/* Immagine */}
@@ -93,57 +83,48 @@ export default function SmartphoneDetailPage() {
           {/* Specifiche tecniche */}
           <h2 className="fw-bold mb-4">Specifiche tecniche</h2>
           <ul className="list-group list-group-flush text-start">
-            {/* Brand */}
             <li className="list-group-item d-flex justify-content-between align-items-center">
               Brand
               <span className="fw-bold">{phone.brand}</span>
             </li>
-            {/* Prezzo */}
             <li className="list-group-item d-flex justify-content-between align-items-center">
               Prezzo
               <span className="fw-bold">{phone.price}€</span>
             </li>
-            {/* Sistema operativo */}
             <li className="list-group-item d-flex justify-content-between align-items-center">
               Sistema operativo
               <span className="fw-bold">{phone.os}</span>
             </li>
-            {/* Dimensioni dello schermo */}
             <li className="list-group-item d-flex justify-content-between align-items-center">
               Schermo
               <span className="fw-bold">{phone.screenSize}"</span>
             </li>
-            {/* Batteria */}
             <li className="list-group-item d-flex justify-content-between align-items-center">
               Batteria
               <span className="fw-bold">{phone.batteryMah} mAh</span>
             </li>
-            {/* Fotocamera posteriore */}
             <li className="list-group-item d-flex justify-content-between align-items-center">
               Fotocamera posteriore
               <span className="fw-bold">{phone.rearCameraMP} MP</span>
             </li>
-            {/* Fotocamera frontale */}
             <li className="list-group-item d-flex justify-content-between align-items-center">
               Fotocamera frontale
               <span className="fw-bold">{phone.frontCameraMP} MP</span>
             </li>
-            {/* RAM */}
             <li className="list-group-item d-flex justify-content-between align-items-center">
               RAM
               <span className="fw-bold">{phone.ramGB} GB</span>
             </li>
-            {/* Memoria interna */}
             <li className="list-group-item d-flex justify-content-between align-items-center">
               Memoria interna
               <span className="fw-bold">{phone.storageGB} GB</span>
             </li>
-            {/* Supporto 5G */}
             <li className="list-group-item d-flex justify-content-between align-items-center">
               5G
               <span className="fw-bold">{phone.has5G ? "Sì" : "No"}</span>
             </li>
           </ul>
+
           {/* Bottone per confrontare con altri smartphone */}
           <div className="text-center mt-4">
             <Link

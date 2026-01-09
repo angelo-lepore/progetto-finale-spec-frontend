@@ -1,4 +1,6 @@
+// Import useEffect e useState
 import { useEffect, useState } from "react";
+// Import Link
 import { Link } from "react-router-dom";
 
 export default function SmartphonesPage() {
@@ -30,11 +32,13 @@ export default function SmartphonesPage() {
     return <p className="text-center mt-5">Caricamento...</p>;
   }
 
-  // Filtriamo gli smartphone in base al termine di ricerca
+  // Filtriamo e ordiniamo gli smartphone in base alla ricerca e all'ordinamento
   const filteredSmartphones = smartphones
+    // Filter per cercare
     .filter((phone) =>
       phone.title.toLowerCase().includes(searchTerm.toLowerCase())
     )
+    // Sort per ordinare
     .sort((a, b) => {
       if (sortOrder === "asc") {
         return a.title.localeCompare(b.title);
@@ -58,7 +62,7 @@ export default function SmartphonesPage() {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-            {/* Tasto di ordinamento */}
+            {/* Select ordinamento */}
             <div className="col-md-2 mb-2">
               <select
                 className="form-select yellow-focus"
@@ -71,8 +75,8 @@ export default function SmartphonesPage() {
             </div>
           </div>
 
+          {/* Lista smartphone */}
           <div className="row g-4">
-            {/* Ciclo sugli smartphone filtrati */}
             {filteredSmartphones.length > 0 ? (
               filteredSmartphones.map((phone) => (
                 <div key={phone.id} className="col-md-4">
@@ -92,6 +96,7 @@ export default function SmartphonesPage() {
                 </div>
               ))
             ) : (
+              // Messaggio se non ci sono smartphone che corrispondono alla ricerca
               <p className="text-center mt-3">Nessuno smartphone trovato</p>
             )}
           </div>

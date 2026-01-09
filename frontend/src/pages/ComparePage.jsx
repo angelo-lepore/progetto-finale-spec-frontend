@@ -1,4 +1,6 @@
+// Import Link e useLocation
 import { Link, useLocation } from "react-router-dom";
+// Import useEffect e useState
 import { useEffect, useState } from "react";
 
 export default function ComparePage() {
