@@ -32,7 +32,19 @@ export default function FavoritesPage() {
               {/* Card per ogni smartphone preferito */}
               <div className="card h-100 shadow-sm text-center p-4">
                 <h5 className="fw-bold">{phone.title}</h5>
+                <img
+                  src={phone.imageUrl}
+                  alt={phone.title}
+                  className="img-fluid my-3"
+                  style={{
+                    width: "200px",
+                    height: "200px",
+                    objectFit: "contain",
+                    margin: "0 auto",
+                  }}
+                />
                 <p className="text-muted">{phone.brand}</p>
+                <p className="fw-bold">{phone.price}€</p>
                 {/* Link alla pagina di dettaglio */}
                 <Link
                   to={`/smartphones/${phone.id}`}
