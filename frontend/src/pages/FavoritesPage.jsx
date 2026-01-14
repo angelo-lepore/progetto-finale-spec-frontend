@@ -20,7 +20,7 @@ export default function FavoritesPage() {
       </main>
     );
 
-  // Render lista dei preferiti
+  // Se ci sono preferiti, mostriamo la lista
   return (
     <main className="py-5 bg-light">
       <div className="container">

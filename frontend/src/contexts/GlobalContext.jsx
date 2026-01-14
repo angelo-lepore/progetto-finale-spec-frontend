@@ -1,4 +1,4 @@
-// src/contexts/GlobalContext.jsx
+// import createContext, useState, useEffect
 import { createContext, useState, useEffect } from "react";
 
 // Creiamo il contesto globale
@@ -42,13 +42,13 @@ export function GlobalProvider({ children }) {
     }
   };
 
-  // Tutti i dati/funzioni che vogliamo esporre
+  // Tutti i dati/funzioni che vogliamo rendere disponibili globalmente
   const contextValue = {
-    favorites,
-    isFavorite,
-    addFavorite,
-    removeFavorite,
-    toggleFavorite,
+    favorites, // array dei prodotti preferiti
+    isFavorite, // funzione per controllare se un prodotto è nei preferiti
+    addFavorite, // funzione per aggiungere
+    removeFavorite, // funzione per rimuovere
+    toggleFavorite, // funzione per aggiungere/rimuovere automaticamente
   };
 
   return (
